@@ -33,7 +33,7 @@ class Auth implements AuthBase {
 
   @override
   Future<User> signInAnonymously() async {
-    final result = await _firebaseAuth.signInAnonymously()
+    final result = await _firebaseAuth.signInAnonymously();
     return _userFromFirebase(result.user);
   }
 
