@@ -5,15 +5,13 @@ import 'package:time_tracker_flutter/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
 
-  SignInPage({@required this.auth, @required this.onSignIn});
+  SignInPage({@required this.auth});
 
   final AuthBase auth;
-  final Function(User) onSignIn;
 
   Future<void> _signInAnonymously() async {
     try {
-      User user = await auth.signInAnonymously();
-      onSignIn(user); 
+      await auth.signInAnonymously();
     } catch (e) {
       print(e.toString());
     }
