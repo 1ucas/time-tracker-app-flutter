@@ -16,6 +16,8 @@ class EmailSignInForm extends StatefulWidget {
 class _State extends State<EmailSignInForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
@@ -24,7 +26,7 @@ class _State extends State<EmailSignInForm> {
 
   void _submit() async {
     try {
-      if(_formType == EmailSignInFormType.signIn) {
+      if (_formType == EmailSignInFormType.signIn) {
         await widget.auth.signInWithEmailAndPassword(_email, _password);
       } else {
         await widget.auth.createUserWithEmailAndPassword(_email, _password);
@@ -45,6 +47,10 @@ class _State extends State<EmailSignInForm> {
     _passwordController.clear();
   }
 
+  void _emailEditingComplete() {
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
+  }
+
   List<Widget> _buildChildren() {
     final primaryText = _formType == EmailSignInFormType.signIn
         ? 'Sign in'
@@ -53,24 +59,10 @@ class _State extends State<EmailSignInForm> {
         ? 'Need an account? Register'
         : 'Have an account? Sign in';
     return [
-      TextField(
-        decoration: InputDecoration(
-          labelText: 'Email',
-          hintText: 'test@test.com',
-        ),
-        controller: _emailController,
-      ),
-      SizedBox(
-        height: 8.0,
-      ),
-      TextField(
-        decoration: InputDecoration(labelText: 'Password'),
-        obscureText: true,
-        controller: _passwordController,
-      ),
-      SizedBox(
-        height: 8.0,
-      ),
+      _buildEmailTextField(),
+      SizedBox(height: 8.0),
+      _buildPasswordTextField(),
+      SizedBox(height: 8.0),
       FormSubmitButton(
         text: primaryText,
         onPressed: _submit,
@@ -80,6 +72,33 @@ class _State extends State<EmailSignInForm> {
         onPressed: _toggleFormType,
       )
     ];
+  }
+
+  TextField _buildPasswordTextField() {
+    return TextField(
+      decoration: InputDecoration(labelText: 'Password'),
+      obscureText: true,
+      controller: _passwordController,
+      focusNode: _passwordFocusNode,
+      textInputAction: TextInputAction.done,
+      onEditingComplete: _submit,
+    );
+  }
+
+  TextField _buildEmailTextField() {
+    return TextField(
+      decoration: InputDecoration(
+        labelText: 'Email',
+        hintText: 'test@test.com',
+      ),
+      controller: _emailController,
+      focusNode: _emailFocusNode,
+      autocorrect: false,
+      enableSuggestions: false,
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      onEditingComplete: _emailEditingComplete,
+    );
   }
 
   @override
