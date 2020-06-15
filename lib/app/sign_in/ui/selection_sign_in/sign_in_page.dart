@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter/app/sign_in/email_sign_in_page.dart';
-import 'package:time_tracker_flutter/app/sign_in/sign_in_bloc.dart';
-import 'package:time_tracker_flutter/app/sign_in/sign_in_button.dart';
-import 'package:time_tracker_flutter/app/sign_in/social_sign_in_button.dart';
-import 'package:time_tracker_flutter/common_widgets/platform_exception_alert_dialog.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
+import 'package:time_tracker_flutter/app/sign_in/domain/use_cases/sign_in_bloc.dart';
+import 'package:time_tracker_flutter/app/sign_in/ui/email_sign_in/email_sign_in_page.dart';
+import 'package:time_tracker_flutter/app/sign_in/ui/sign_in_widgets/sign_in_button.dart';
+import 'package:time_tracker_flutter/app/sign_in/ui/sign_in_widgets/social_sign_in_button.dart';
+import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
+import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key key, @required this.bloc}) : super(key: key);
@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
   final SignInBloc bloc;
 
   static Widget create(BuildContext context) {
-    final auth = Provider.of<AuthBase>(context);
+    final auth = Provider.of<AuthRepository>(context);
     return Provider<SignInBloc>(
       create: (_) => SignInBloc(auth),
       dispose: (context, bloc) => bloc.dispose(),

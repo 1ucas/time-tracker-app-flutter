@@ -1,15 +1,14 @@
 
 import 'dart:async';
 
-import 'package:time_tracker_flutter/services/auth.dart';
+import 'package:time_tracker_flutter/common/domain/models/user.dart';
+import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
 
 class SignInBloc {
   SignInBloc(this.auth);
   
-  final AuthBase auth;
+  final AuthRepository auth;
   final _isLoadingController = StreamController<bool>();
-
-
 
   get isLoadingStream => _isLoadingController.stream;
 

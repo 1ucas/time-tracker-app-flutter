@@ -1,25 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:time_tracker_flutter/common/domain/models/user.dart';
+import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
 
-class User {
-  User({@required this.uid});
-
-  final String uid;
-}
-
-abstract class AuthBase {
-  Stream<User> get onAuthStateChanged;
-  Future<User> currentUser();
-  Future<User> signInAnonymously();
-  Future<User> signInWithGoogle();
-  Future<User> signInWithEmailAndPassword(String email, String password);
-  Future<User> createUserWithEmailAndPassword(String email, String password);
-  Future<void> signOut();
-}
-
-class Auth implements AuthBase {
+class FirebaseAuthRepository implements AuthRepository {
   final _firebaseAuth = FirebaseAuth.instance;
 
   User _userFromFirebase(FirebaseUser user) {
