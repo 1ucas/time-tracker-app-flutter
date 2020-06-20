@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:time_tracker_flutter/app/sign_in/email_sign_in_model.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
+import 'package:time_tracker_flutter/app/sign_in/domain/models/email_sign_in_model.dart';
+import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
 
 class EmailSignInBloc {
   EmailSignInBloc({@required this.auth});
 
-  final AuthBase auth;
+  final AuthRepository auth;
   final _modelController = StreamController<EmailSignInModel>();
 
   get modelStream => _modelController.stream;

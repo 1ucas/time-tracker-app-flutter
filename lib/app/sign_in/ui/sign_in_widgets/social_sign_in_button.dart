@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker_flutter/common_widgets/manobray_raised_button.dart';
+import 'package:time_tracker_flutter/common/ui/custom_widgets/manobray_raised_button.dart';
 
 class SocialSignInButton extends ManobrayRaisedButton {
   SocialSignInButton({

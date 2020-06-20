@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter/app/sign_in/email_sign_in_bloc.dart';
-import 'package:time_tracker_flutter/app/sign_in/email_sign_in_model.dart';
-import 'package:time_tracker_flutter/common_widgets/form_submit_buttom.dart';
-import 'package:time_tracker_flutter/common_widgets/platform_exception_alert_dialog.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
+import 'package:time_tracker_flutter/app/sign_in/domain/models/email_sign_in_model.dart';
+import 'package:time_tracker_flutter/app/sign_in/domain/use_cases/email_sign_in_bloc.dart';
+import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
+import 'package:time_tracker_flutter/common/ui/custom_widgets/form_submit_buttom.dart';
+import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class EmailSignInFormBlocBased extends StatefulWidget {
   EmailSignInFormBlocBased({@required this.bloc});
@@ -13,7 +13,7 @@ class EmailSignInFormBlocBased extends StatefulWidget {
   final EmailSignInBloc bloc;
 
   static Widget create(BuildContext context) {
-    final AuthBase auth = Provider.of<AuthBase>(context);
+    final AuthRepository auth = Provider.of<AuthRepository>(context);
     return Provider<EmailSignInBloc>(
       create: (context) => EmailSignInBloc(auth: auth),
       dispose: (context, bloc) => bloc.dispose(),
