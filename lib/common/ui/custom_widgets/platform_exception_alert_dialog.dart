@@ -26,5 +26,6 @@ class PlatformExceptionAlertDialog extends PlatformAlertDialog {
     'ERROR_USER_DISABLED': 'User Disabled',
     'ERROR_TOO_MANY_REQUESTS': 'Ops: Try again later.',
     'ERROR_OPERATION_NOT_ALLOWED': 'Ops: Try again later.',
+    'Error performing setData' : 'Missing or insufficient permissions.'
   };
 }
