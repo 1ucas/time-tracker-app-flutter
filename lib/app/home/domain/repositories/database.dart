@@ -5,5 +5,7 @@ abstract class Database {
 
   Future<void> createJob(Job job);
   Stream<List<Job>> jobsStream();
-  
+
 }
+
+String documentIdFromCurrentDate() => DateTime.now().toIso8601String();
