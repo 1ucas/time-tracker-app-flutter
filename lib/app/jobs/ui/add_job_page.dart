@@ -3,13 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter/app/home/domain/models/job.dart';
 import 'package:time_tracker_flutter/app/home/domain/repositories/database.dart';
+import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_alert_dialog.dart';
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class AddJobPage extends StatefulWidget {
   const AddJobPage({Key key, @required this.database}) : super(key: key);
 
   final Database database;
-  
+
   static Future<void> show(BuildContext context) async {
     final database = Provider.of<Database>(context, listen: false);
     await Navigator.of(context).push(
@@ -25,15 +26,14 @@ class AddJobPage extends StatefulWidget {
 }
 
 class _AddJobPageState extends State<AddJobPage> {
-
   final _formKey = GlobalKey<FormState>();
 
   String _name;
-  int _ratePerHour; 
+  int _ratePerHour;
 
   bool _validateAndSaveForm() {
     final form = _formKey.currentState;
-    if(form.validate()) {
+    if (form.validate()) {
       form.save();
       return true;
     } else {
@@ -68,11 +68,21 @@ class _AddJobPageState extends State<AddJobPage> {
   }
 
   Future<void> _submit() async {
-    if(_validateAndSaveForm()) {
+    if (_validateAndSaveForm()) {
       try {
-        final job = Job(name: _name, ratePerHour: _ratePerHour);
-        await widget.database.createJob(job);
-        Navigator.of(context).pop();
+        final jobs = await widget.database.jobsStream().first;
+        final allNames = jobs.map((e) => e.name).toList();
+        if (allNames.contains(_name)) {
+          PlatformAlertDialog(
+            title: 'Name already used',
+            content: 'Please choose a different job name',
+            defaultActionText: 'OK',
+          ).show(context);
+        } else {
+          final job = Job(name: _name, ratePerHour: _ratePerHour);
+          await widget.database.createJob(job);
+          Navigator.of(context).pop();
+        }
       } on PlatformException catch (e) {
         PlatformExceptionAlertDialog(
           exception: e,
