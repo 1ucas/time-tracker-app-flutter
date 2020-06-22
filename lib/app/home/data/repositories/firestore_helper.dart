@@ -1,11 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
-
 // Repository ???
 class FirestoreHelper {
-
   FirestoreHelper._();
   static final instance = FirestoreHelper._();
 
@@ -14,11 +11,13 @@ class FirestoreHelper {
     await reference.setData(data);
   }
 
-  Stream<List<T>> collectionStream<T>({@required String path, @required T builder(Map<String, dynamic> data)}) {
+  Stream<List<T>> collectionStream<T>({
+    @required String path,
+    @required T builder(Map<String, dynamic> data, String documentId),
+  }) {
     final reference = Firestore.instance.collection(path);
     final snapshots = reference.snapshots();
     return snapshots.map((snapshot) =>
-        snapshot.documents.map((document) => builder(document.data)).toList());
+        snapshot.documents.map((document) => builder(document.data, document.documentID)).toList());
   }
-
 }
