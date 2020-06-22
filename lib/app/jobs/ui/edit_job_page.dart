@@ -7,16 +7,23 @@ import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_alert_dia
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class EditJobPage extends StatefulWidget {
-  const EditJobPage({Key key, @required this.database, this.job}) : super(key: key);
+  const EditJobPage({Key key, @required this.database, this.job})
+      : super(key: key);
 
   final Database database;
   final Job job;
 
-  static Future<void> show(BuildContext context, {Job job}) async {
-    final database = Provider.of<Database>(context, listen: false);
+  static Future<void> show(
+    BuildContext context, {
+    @required Database database,
+    Job job,
+  }) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EditJobPage(database: database, job: job,),
+        builder: (context) => EditJobPage(
+          database: database,
+          job: job,
+        ),
         fullscreenDialog: true,
       ),
     );
