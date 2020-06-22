@@ -4,6 +4,7 @@ import 'package:time_tracker_flutter/app/home/domain/models/job.dart';
 abstract class Database {
 
   Future<void> setJob(Job job);
+  Future<void> deleteJob(Job job);
   Stream<List<Job>> jobsStream();
 
 }
