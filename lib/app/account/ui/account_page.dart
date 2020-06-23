@@ -1,12 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_flutter/common/domain/models/user.dart';
 import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
+import 'package:time_tracker_flutter/common/ui/custom_widgets/avatar.dart';
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_alert_dialog.dart';
 
 class AccountPage extends StatelessWidget {
-
-Future<void> _signOut(BuildContext context) async {
+  Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthRepository>(context, listen: false);
       await auth.signOut();
@@ -27,8 +27,16 @@ Future<void> _signOut(BuildContext context) async {
     }
   }
 
+  Widget _buildUserInfo(User user) {
+    return Avatar(
+      photoUrl: user.photoURL,
+      radius: 50,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("Account"),
@@ -44,6 +52,10 @@ Future<void> _signOut(BuildContext context) async {
             onPressed: () => _confirmSignOut(context),
           )
         ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(130),
+          child: _buildUserInfo(user),
+        ),
       ),
     );
   }

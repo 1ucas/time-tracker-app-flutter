@@ -11,7 +11,7 @@ class FirebaseAuthRepository implements AuthRepository {
     if (user == null) {
       return null;
     }
-    return User(uid: user.uid);
+    return User(uid: user.uid, displayName: user.displayName, photoURL: user.photoUrl);
   }
 
   @override
