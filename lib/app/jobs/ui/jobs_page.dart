@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -7,40 +8,18 @@ import 'package:time_tracker_flutter/app/job_entries/job_entries_page.dart';
 import 'package:time_tracker_flutter/app/jobs/ui/edit_job_page.dart';
 import 'package:time_tracker_flutter/app/jobs/ui/job_list_tile.dart';
 import 'package:time_tracker_flutter/app/jobs/ui/list_item_builder.dart';
-import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
-import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_alert_dialog.dart';
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class JobsPage extends StatelessWidget {
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthRepository>(context, listen: false);
-      await auth.signOut();
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didSignOut = await PlatformAlertDialog(
-      cancelActionText: 'Cancel',
-      content: 'Are you sure you want to logout?',
-      defaultActionText: "Logout",
-      title: 'Logout',
-    ).show(context);
-    if (didSignOut == true) {
-      _signOut(context);
-    }
-  }
-
   Future<void> _delete(BuildContext context, Job job) async {
-    try {final database = Provider.of<Database>(context, listen: false);
-    await database.deleteJob(job);
-    } on PlatformException catch(e) {
+    try {
+      final database = Provider.of<Database>(context, listen: false);
+      await database.deleteJob(job);
+    } on PlatformException catch (e) {
       PlatformExceptionAlertDialog(
-          exception: e,
-          title: 'Operation Failed',
-        ).show(context);
+        exception: e,
+        title: 'Operation Failed',
+      ).show(context);
     }
   }
 
@@ -48,25 +27,18 @@ class JobsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jobs Page"),
+        title: Text("Jobs"),
         actions: <Widget>[
-          FlatButton(
-            child: Text(
-              "Logout",
-              style: TextStyle(
-                fontSize: 18.0,
+          IconButton(
+              icon: Icon(
+                Icons.add,
                 color: Colors.white,
               ),
-            ),
-            onPressed: () => _confirmSignOut(context),
-          )
+              onPressed: () => EditJobPage.show(context,
+                  database: Provider.of<Database>(context, listen: false))),
         ],
       ),
       body: _buildContents(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => EditJobPage.show(context, database: Provider.of<Database>(context, listen: false)),
-        child: Icon(Icons.add),
-      ),
     );
   }
 
