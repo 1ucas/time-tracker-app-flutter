@@ -54,4 +54,7 @@ class Job {
   String toString() {
     return 'Job => id:$id, name: $name, ratePerHour: $ratePerHour';
   }
+
+  // Code Generation para facilitar operadores 
+  // Pacote Sugerido: built_value
 }
