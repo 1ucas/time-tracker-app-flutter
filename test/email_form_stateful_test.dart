@@ -6,8 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter/app/sign_in/ui/email_sign_in/email_sign_in_form_stateful.dart';
 import 'package:time_tracker_flutter/common/domain/models/user.dart';
 import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.dart';
-
-class MockAuth extends Mock implements AuthRepository {}
+import 'mocks_util.dart';
 
 void main() {
   MockAuth mockAuth;

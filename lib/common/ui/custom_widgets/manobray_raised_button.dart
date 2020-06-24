@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 class ManobrayRaisedButton extends StatelessWidget {
   ManobrayRaisedButton({
+    Key key,
     this.child,
     this.color,
     this.borderRadius: 2.0,
     this.height: 50,
     this.onPressed,
-  }) : assert(borderRadius != null);
+  }) : assert(borderRadius != null), super(key: key);
 
   final Widget child;
   final Color color;

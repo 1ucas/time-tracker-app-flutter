@@ -10,11 +10,15 @@ import 'package:time_tracker_flutter/common/domain/repositories/auth_repository.
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key, @required this.manager, @required this.isLoading}) : super(key: key);
+  const SignInPage({
+    Key key,
+    @required this.manager,
+    @required this.isLoading,
+  }) : super(key: key);
 
   final SignInManager manager;
-
   final bool isLoading;
+  static const Key emailPasswordKey = Key('email-password');
 
   static Widget create(BuildContext context) {
     final auth = Provider.of<AuthRepository>(context);
@@ -24,7 +28,10 @@ class SignInPage extends StatelessWidget {
         builder: (_, isLoading, __) => Provider<SignInManager>(
           create: (_) => SignInManager(auth: auth, isLoading: isLoading),
           child: Consumer<SignInManager>(
-              builder: (context, bloc, _) => SignInPage(manager: bloc, isLoading: isLoading.value,)),
+              builder: (context, bloc, _) => SignInPage(
+                    manager: bloc,
+                    isLoading: isLoading.value,
+                  )),
         ),
       ),
     );
@@ -100,6 +107,7 @@ class SignInPage extends StatelessWidget {
           ),
           SizedBox(height: 8),
           SignInButton(
+            key: emailPasswordKey,
             text: 'Sign in with email',
             textColor: Colors.white,
             color: Colors.teal[700],
