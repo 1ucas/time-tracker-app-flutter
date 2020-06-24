@@ -8,6 +8,10 @@ import 'package:time_tracker_flutter/common/ui/custom_widgets/form_submit_buttom
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_exception_alert_dialog.dart';
 
 class EmailSignInFormStateful extends StatefulWidget with EmailAndPasswordValidators {
+  EmailSignInFormStateful({this.onSignedIn});
+  
+  final VoidCallback onSignedIn;
+  
   @override
   EmailSignInFormStatefulState createState() => EmailSignInFormStatefulState();
 }
@@ -46,7 +50,9 @@ class EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
       } else {
         await auth.createUserWithEmailAndPassword(_email, _password);
       }
-      Navigator.of(context).pop();
+      if(widget.onSignedIn != null) {
+        widget.onSignedIn();
+      }
     } on PlatformException catch (e) {
       PlatformExceptionAlertDialog(
         exception: e,
