@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:time_tracker_flutter/app/sign_in/domain/models/email_sign_in_change_model.dart';
 import 'mocks_util.dart';
 

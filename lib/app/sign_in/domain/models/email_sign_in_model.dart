@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:time_tracker_flutter/app/sign_in/domain/models/validators.dart';
 
 enum EmailSignInFormType { signIn, register }
@@ -58,4 +60,31 @@ class EmailSignInModel with EmailAndPasswordValidators {
       submitted: submitted ?? this.submitted,
     );
   }
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => hashValues(email, password, type, isLoading, submitted);
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (runtimeType != other.runtimeType) {
+      return false;
+    }
+    final EmailSignInModel otherModel = other;
+    return email == otherModel.email &&
+        password == otherModel.password &&
+        submitted == otherModel.submitted &&
+        isLoading == otherModel.isLoading &&
+        type == otherModel.type;
+  }
+
+  @override
+  String toString() {
+    return 'Model => email:$email, password: $password, submitted: $submitted, isLoading: $isLoading, type: $type';
+  }
+
+
 }
