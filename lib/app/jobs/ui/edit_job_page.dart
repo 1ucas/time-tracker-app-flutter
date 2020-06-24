@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter/app/home/domain/models/job.dart';
 import 'package:time_tracker_flutter/app/home/domain/repositories/database.dart';
 import 'package:time_tracker_flutter/common/ui/custom_widgets/platform_alert_dialog.dart';
