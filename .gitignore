@@ -44,3 +44,4 @@ app.*.map.json
 
 #Arquivo do Firebase para Android
 google-services.json
+ios/Runner/GoogleService-Info.plist
