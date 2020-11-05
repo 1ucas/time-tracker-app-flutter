@@ -1,3 +1,5 @@
+![Build](https://github.com/1ucas/time-tracker-app-flutter/workflows/Flutter-CI/badge.svg)
+
 # Time Tracker Flutter
 
 Aplicativo de Log de hora escrito em Dart.
