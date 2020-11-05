@@ -12,5 +12,9 @@ Use apenas para consulta.
 
 ### Para Buildar
 
-Crie um projeto no Firebase (é 0800), baixe o arquivo google-services.json e inclua na pasta: ```android/app```
+1. Crie um projeto no Firebase (é 0800)
+1. Baixe o arquivo google-services.json e inclua na pasta: ```android/app```
+1. No console do Firebase vá em: Develop -> Authentication -> Sign-in Methods
+1. Habilite as autenticações: Email, Google, Anonymous
+1. Ainda no "Sign-in Methods" inclua como Authorized Domains a sua URL do firebase (xxxxxx.firebaseapp.com)
 
