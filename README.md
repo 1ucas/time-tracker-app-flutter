@@ -16,9 +16,9 @@ Use apenas para consulta.
 1. Entre com sua conta google no navegador
 1. Crie um projeto no Firebase em http://console.firebase.google.com
 1. Siga os passos para adicionar uma app Android
-  1. ProjectOverview (engrenagem) -> Project Settings - Your apps -> Add App
-  1. Apenas para funcionar o Google Sign-In é necessário incluir a chave SHA-1 de seu keystore.debug
-  1. Para gerar a chave SHA-1 vá em -> android / app -> e rode comando: ```./gradlew signingReport```
+   * ProjectOverview (engrenagem) -> Project Settings - Your apps -> Add App
+   * Apenas para funcionar o Google Sign-In é necessário incluir a chave SHA-1 de seu keystore.debug
+   * Para gerar a chave SHA-1 vá em -> android / app -> e rode comando: ```./gradlew signingReport```
 1. Baixe o arquivo google-services.json e inclua na pasta: android/app 
 
 #### Configuração da autenticação
@@ -29,7 +29,7 @@ Use apenas para consulta.
 
 #### Configuração do projeto Flutter na IDE
 1. Clone o repositório 
-1. Na pasta raiz, digite os comandos
-  1. ``` flutter pub get ```
-  1. ``` flutter clean ```
-  1. ``` flutter run -v ```  -> o parâmetro ``` -v ``` é opcional para ver mais detalhes
+1. Na pasta raiz, digite os comando:
+   * ``` flutter pub get ```
+   * ``` flutter clean ```
+   * ``` flutter run -v ```  -> o parâmetro ``` -v ``` é opcional para ver mais detalhes
